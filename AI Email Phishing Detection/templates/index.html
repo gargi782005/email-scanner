@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Security Scanner</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>AI Email Security Scanner</h2>
+
+    <form method="post">
+        <textarea name="email_content" placeholder="Paste the email text here..."></textarea>
+        <button type="submit">Analyze Email</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <p><strong>Prediction:</strong> {{ result.label }}</p>
+        <p><strong>Confidence:</strong> {{ result.score }}%</p>
+        <p><strong>Risk Level:</strong> {{ result.risk }}</p>
+
+        {% if result.bad_words %}
+        <p><b>Suspicious Words Found:</b></p>
+        <ul style="color: red; text-align: left;">
+            {% for w in result.bad_words %}
+            <li>{{ w }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
